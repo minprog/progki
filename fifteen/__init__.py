@@ -172,7 +172,7 @@ def solve3():
 
     for tile in board:
         check.stdout(tile)
-    check.stdout("\n")
+    check.stdout("ftw!")
 
 
 @check50.check(init4)
@@ -210,4 +210,4 @@ def solve4():
 
     for tile in board:
         check.stdout(tile)
-    check.stdout("\n")
+    check.stdout("ftw!")
