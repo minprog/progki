@@ -44,26 +44,18 @@ def init4():
 
 
 @check50.check(init3)
-def invalid8():
-    """3x3 board: catches moving 8 as an illegal move."""
-    check = check50.run("./fifteen 3").stdin("8").stdout("Illegal move.")
+def invalid():
+    """3x3 board: catches moving 2, 4, 5, 6, 7, 8 as illegal moves."""
+    moves = ["2", "4", "5", "6", "7", "8"]
+
+    check = check50.run("./fifteen 3")
+
+    for move in moves:
+        check.stdin(move).stdout("Illegal move.")
 
     board = ["8", "7", "6",
              "5", "4", "3",
              "2", "1", "[_0]"]
-    for tile in board:
-        check.stdout(tile)
-    check.stdout("\n")
-
-
-@check50.check(init3)
-def valid1():
-    """3x3 board: catches moving 1 as a legal move."""
-    check = check50.run("./fifteen 3").stdin("1")
-
-    board = ["8", "7", "6",
-             "5", "4", "3",
-             "2", "[_0]", "1"]
     for tile in board:
         check.stdout(tile)
     check.stdout("\n")
@@ -109,7 +101,7 @@ def move_left2():
     check.stdout("\n")
 
 
-check50.check(init3)
+@check50.check(init3)
 def move_left_right():
     """3x3 board: move blank left then right."""
     check = check50.run("./fifteen 3").stdin("1")
@@ -129,7 +121,7 @@ def move_left_right():
     check.stdout("\n")
 
 
-check50.check(init3)
+@check50.check(init3)
 def move_up_down():
     """3x3 board: move blank up then down."""
     check = check50.run("./fifteen 3").stdin("3")
@@ -144,6 +136,41 @@ def move_up_down():
     board = ["8", "7", "6",
              "5", "4", "3",
              "2", "1", "[_0]"]
+    for tile in board:
+        check.stdout(tile)
+    check.stdout("\n")
+
+
+@check50.check(init3)
+def invalid_center():
+    """3x3 board: move blank left (tile 1) then up (tile 4), then try to move tiles 1, 2, 6, 8"""
+    # move 1
+    check = check50.run("./fifteen 3").stdin("1")
+
+    # check resulting board
+    board = ["8", "7", "6",
+             "5", "4", "3",
+             "2", "[_0]", "1"]
+    for tile in board:
+        check.stdout(tile)
+    check.stdout("\n")
+
+    # move 4
+    check.stdin("4")
+
+    # check resulting board
+    board = ["8", "7", "6",
+             "5", "[_0]", "3",
+             "2", "4", "1"]
+    for tile in board:
+        check.stdout(tile)
+    check.stdout("\n")
+
+    # try moving all corner tiles
+    for move in ["1", "2", "6", "8"]:
+        check.stdin(move).stdout("Illegal move.")
+
+    # check that board state didn't change
     for tile in board:
         check.stdout(tile)
     check.stdout("\n")
