@@ -89,6 +89,9 @@ def occurance_words(out):
     """correct occurance of top five positive words."""
     for word, occ in [("great", 245), ("trump", 88), ("thank", 82), ("good", 55), ("honor", 39)]:
         match = re.search(f"{word}[^\n^\d]*(\d+)", out)
+        if not match:
+            raise check50.Failure(f"could not find {word} followed by occurance")
+
         if not match.groups() or not int(match.groups()[0]) == occ:
             raise check50.Mismatch(f"{word} {occ}", out)
 
