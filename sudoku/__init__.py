@@ -140,7 +140,7 @@ def check_sudoku(sudoku):
     for x, y in itertools.product(range(9), range(9)):
         try:
             int(sudoku[x][y])
-        except TypeError:
+        except ValueError:
             raise check50.Failure(f"Expected the sudoku to contain only integers, but found a {type(sudoku[x][y])}")
 
         if int(sudoku[x][y]) not in set(range(10)):
