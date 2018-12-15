@@ -1,5 +1,7 @@
 import check50
 import pkg_resources
+import shutil
+import os
 if int(pkg_resources.get_distribution("check50").version[0]) < 3:
     raise ImportError("This check requires check50 version 3.0.0 or above.")
 
@@ -43,10 +45,17 @@ help_statement = ["EAST/WEST/IN/OUT", "QUIT quits", "HELP prints",
 no_item = "No such item"
 
 
+def init(game):
+    check50.include("../data")
+    for other_game in {"Crowther", "Tiny", "Small"} - {game}:
+        for items in ["Rooms", "Items"]:
+            shutil.copyfile(f"data/{game}{items}.txt", f"data/{other_game}{items}.txt")
+
+
 @check50.check()
 def exists():
     """Checking if all files exist."""
-    check50.include("data")
+    init("Tiny")
     check50.exists("adventure.py")
     check50.exists("room.py")
 

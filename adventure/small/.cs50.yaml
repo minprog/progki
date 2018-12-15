@@ -4,6 +4,4 @@ check50:
     - !exclude "*"
     - !require "adventure.py"
     - !require "room.py"
-    - !require "item.py"
-    - !require "inventory.py"
     - !include "*.py"

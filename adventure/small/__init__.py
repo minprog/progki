@@ -4,6 +4,14 @@ tiny = check50.import_checks("../tiny")
 from tiny import *
 
 
+@check50.check()
+def exists():
+    """Checking if all files exist."""
+    init("Small")
+    check50.exists("adventure.py")
+    check50.exists("room.py")
+
+
 @check50.check(handle_items)
 def conditional_move():
     """Check if holding an item affects conditional movement."""

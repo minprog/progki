@@ -15,6 +15,14 @@ room_3_description = ("You are inside a building, a well house for a large "
 room_3_items = ["KEYS", "a set of keys", "\n", "WATER", "a bottle of water"]
 
 
+@check50.check()
+def exists():
+    """Checking if all files exist."""
+    init("Crowther")
+    check50.exists("adventure.py")
+    check50.exists("room.py")
+
+
 @check50.check(conditional_move)
 def multiple_conditional_move():
     """Check if holding multiple items affects conditional movement."""
