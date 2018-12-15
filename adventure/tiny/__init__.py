@@ -3,17 +3,6 @@ import pkg_resources
 if int(pkg_resources.get_distribution("check50").version[0]) < 3:
     raise ImportError("This check requires check50 version 3.0.0 or above.")
 
-
-# Template for checks:
-'''
-
-@check50.check()
-def test_name():
-    """Test message."""
-    check50.run(run_command)
-
-'''
-
 run_command = "python3 adventure.py"
 
 room_1_name = "Outside building"
