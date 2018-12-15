@@ -65,7 +65,7 @@ def move_once():
 
 @check50.check(move_once)
 def move_invalid():
-    """Attempt an invalid move."""
+    """Attempt to move EAST into an unconnected room."""
     check50.run(run_command).stdin("EAST").stdout("Invalid command")
 
 
@@ -99,7 +99,7 @@ def helper_commands():
             check.stdout(help)
     except check50.Failure as error:
         raise check50.Failure(f"HELP did not print the expected message.\n"
-                              "    {error}")
+                              f"    {error}")
 
     # Test LOOK command
     try:
@@ -109,7 +109,7 @@ def helper_commands():
                                                       regex=False)
     except check50.Failure as error:
         raise check50.Failure(f"LOOK/look did not print the expected room"
-                              "description.\n    {error}")
+                              f"description.\n    {error}")
 
     # Test QUIT
     try:
@@ -117,7 +117,7 @@ def helper_commands():
                                                       regex=False).exit(0)
     except check50.Failure as error:
         raise check50.Failure(f"QUIT did not function as expected.\n"
-                              "    {error}")
+                              f"    {error}")
 
 
 @check50.check(helper_commands)
@@ -140,9 +140,9 @@ def find_items():
         for item in room_3_items:
             check.stdout(item, regex=False)
     except check50.Failure as error:
-        raise check50.Failure("Could not find items upon first entering room.\n"
-                              "    Remember to seperate multiple items by a "
-                              "single newline.\n"
+        raise check50.Failure(f"Could not find items upon first entering room.\n"
+                              f"    Remember to seperate multiple items by a "
+                              f"single newline.\n"
                               f"    {error}")
 
     # Check for look command
@@ -157,7 +157,7 @@ def find_items():
         for item in room_3_items:
             check.stdout(item, regex=False)
     except check50.Failure as error:
-        raise check50.Failure("Could not find items when using LOOK.\n"
+        raise check50.Failure(f"Could not find items when using LOOK.\n"
                               f"    {error}")
 
 
